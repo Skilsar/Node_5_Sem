@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>03_03</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        let n = 1;
+        const start_time = Date.now();
+        for (var k = 1; k <= 20; k++) {
+            fetch(`/fact?k=${k}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'aplication/json'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then((data) => {
+                    document.body.innerHTML += (n++) + '. Результат: ' + (Date.now() - start_time) + ' - ' + data
+                        .k + '/' + data.fact + '<br/>';
+                });
+        }
+    </script>
+</body>
+
+</html>

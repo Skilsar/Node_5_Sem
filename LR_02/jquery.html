@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_06</title>
+</head>
+
+<body>
+    <h1>Лабараторная работа №2</h1>
+    <h2>Задание 6</h2>
+    <h2 id="name"></h2>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script>
+        $.ajax({
+        url: '/api/name', /* Куда пойдет запрос */
+        method: 'get', /* Метод передачи (post или get) */
+        dataType: 'text', /* Тип данных в ответе (xml, json, script, html). */
+        success: function(data){ /* функция которая будет выполнена после успешного запроса. */
+            console.log('result: ', data);
+            $('#name').text(data) /* В переменной data содержится ответ. */
+        }
+        });
+    </script>
+</body>
+
+</html>

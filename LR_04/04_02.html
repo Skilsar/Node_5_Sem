@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04_02</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .pageTitle {
+            text-align: center;
+        }
+
+        .funcTabs {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul,
+        li {
+            padding: 0;
+            margin: 0;
+        }
+
+        .tabs {
+            margin-bottom: 20px;
+        }
+
+        .tabs li {
+            display: inline-block;
+            background-color: #333;
+        }
+
+        .tabs li a {
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            padding: 0 10px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .tabs-content {
+            width: 640px;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .tabs-content ul {
+            list-style: none;
+            height: 500px;
+            overflow: hidden;
+            overflow-y: hidden;
+        }
+
+        .tabs-content ul li {
+            width: 638px;
+            height: 498px;
+            border: 1px solid red;
+        }
+
+        .tabs-content ul li div {
+            padding: 20px;
+        }
+
+        .btn {
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 10px;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+            background-color: #616161;
+        }
+
+        .table {
+            width: 100%;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .table thead th {
+            font-weight: bold;
+            text-align: left;
+            border: none;
+            padding: 10px 15px;
+            background: #d8d8d8;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+
+        .table tbody td {
+            text-align: left;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            padding: 10px 15px;
+            vertical-align: top;
+        }
+
+        .table thead tr th:first-child,
+        .table tbody tr td:first-child {
+            border-left: none;
+        }
+
+        .table thead tr th:last-child,
+        .table tbody tr td:last-child {
+            border-right: none;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background: #f3f3f3;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form>label {
+            font-size: 18px;
+        }
+
+        form>input {
+            background-color: rgb(180, 180, 180);
+            padding: 8px 10px;
+            font-size: 18px;
+            color: white;
+            margin: 5px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="pageTitle">Hello world</h1>
+    <div id="funcTabs">
+        <ul class="tabs">
+            <li><a href="#get">GET</a></li>
+            <li><a href="#post">POST</a></li>
+            <li><a href="#put">PUT</a></li>
+            <li><a href="#delete">DELETE</a></li>
+        </ul>
+        <div class="tabs-content">
+            <ul>
+                <li id="get">
+                    <div>
+                        <button class="btn" onclick="Get()">Запросить данные</button>
+                        <table class="table" id="allElem">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Birthday</th>
+                                </tr>
+                            <tbody id="allElemRow">
+                            </tbody>
+                            </thead>
+                        </table>
+                    </div>
+                </li>
+                <li id="post">
+                    <div>
+                        <form>
+                            <label for="Name">Name: </label>
+                            <input type="text" id="Name">
+                            <label for="Bday">Birthday: </label>
+                            <input type="text" id="Bday">
+                            <button class="btn" onclick="Post()">Add element</button>
+                        </form>
+                    </div>
+                </li>
+                <li id="put">
+                    <div>
+                        <form>
+                            <label for="uId">ID:</label>
+                            <input type="number" id="uId"><br>
+                            <label for="uName">Name:</label>
+                            <input type="text" id="uName"><br>
+                            <label for="uBday">Birthday: (MM/dd/yyyy)</label>
+                            <input type="text" id="uBday"><br>
+                            <button class="btn" onclick="Put()">Update element</button>
+                            <button class="btn" onclick="FindElem()">Find element</button>
+                        </form>
+                    </div>
+                </li>
+                <li id="delete">
+                    <div>
+                        <form>
+                            <label for="dId">ID:</label>
+                            <input type="number" id="dId"><br>
+                            <button class="btn" onclick="Delete()">Delete element</button>
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="commit">
+        <button class="btn"></button>
+    </div>
+
+    <script>
+        var ids = 3;
+
+        function Get() {
+            fetch('http://localhost:5000/api/db', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(pdata => {
+                    console.log('pdata', pdata);
+                    let get = document.getElementById("allElemRow");
+                    get.innerHTML = '';
+                    pdata.forEach(element => {
+                        get.innerHTML += ('<tr><td>' + element.id + '</td><td>' + element.name +
+                            '</td><td> ' + element.bday + '</td></tr>');
+                    });
+                });
+        }
+
+        function Post() {
+            ids++;
+            let Name = document.getElementById("Name");
+            let BDay = document.getElementById("Bday");
+            let test = document.getElementById("test")
+            if (Name.value && BDay.value) {
+                fetch(`http://localhost:5000/api/db`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: ids,
+                            name: Name.value,
+                            bday: BDay.value
+                        })
+                    })
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(pdata => {
+                        console.log('POST ', pdata);
+                        test.append("yay");
+                    });
+            } else {
+                let get = document.getElementById("get");
+                get.innerHTML = 'error';
+            }
+        }
+
+        ///////////////////////////////////////////////////////////
+        function Put() {
+            let Name = document.getElementById("uName");
+            let BDay = document.getElementById("uBday");
+            let Id = document.getElementById('uId');
+            var dateReg = /^\d{2}([./-])\d{2}\1\d{4}$/
+
+            if (BDay.value.match(dateReg) == null) {
+                alert("Значение даты введено неверно! Error: " + BDay.value.match(dateReg))
+            } else {
+                if (Name.value && BDay.value && Id.value) {
+                    fetch(`http://localhost:5000/api/db`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                id: Id.value,
+                                name: Name.value,
+                                bday: BDay.value
+                            })
+                        })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(pdata => {
+                            console.log('PUT.pdata', pdata);
+                        });
+                } else {
+                    let get = document.getElementById("get");
+                    get.innerHTML = 'error';
+                }
+            }
+        }
+
+        /*function validateDate(dateStr) {
+            const regExp = /^(\d\d?)\/(\d\d?)\/(\d{4})$/;
+            let matches = dateStr.match(regExp);
+            let isValid = matches;
+            let maxDate = [0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            if (matches) {
+                const month = parseInt(matches[1]);
+                const date = parseInt(matches[2]);
+                const year = parseInt(matches[3]);
+
+                isValid = month <= 12 && month > 0;
+                isValid &= date <= maxDate[month] && date > 0;
+
+                const leapYear = (year % 400 == 0) ||
+                    (year % 4 == 0 && year % 100 != 0);
+                isValid &= month != 2 || leapYear || date <= 28;
+            }
+            return isValid
+        }*/
+        ///////////////////////////////////////////////////////////
+
+        function FindElem() {
+            fetch('http://localhost:5000/api/db', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(pdata => {
+                    console.log('pdata', pdata);
+                    let elemID = document.getElementById("uId").value;
+                    let elemIDValue = parseInt(elemID);
+                    console.log(`Search element by ID: ${parseInt(elemID)}\nElement:`);
+                    let Name = document.getElementById("uName");
+                    let BDay = document.getElementById("uBday");
+                    pdata.forEach(element => {
+                        console.log(`On ${elemID} of finded element: ${elemIDValue}`)
+                        Name.value = pdata[elemIDValue].name;
+                        BDay.value = pdata[elemIDValue].bday;
+                    });
+                })
+        };
+
+
+        function Delete() {
+            let Id = document.getElementById("dId");
+
+            if (Id.value) {
+                fetch(`http://localhost:5000/api/db?id=${Id.value}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(pdata => {
+                        console.log('DELETE.pdata', pdata);
+                    });
+            } else {
+                let get = document.getElementById("get");
+                get.innerHTML = 'error';
+            }
+        }
+    </script>
+</body>
+
+</html>
