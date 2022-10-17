@@ -1,12 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alphardex/aqua.css@master/dist/aqua.min.css">
+    <link rel="stylesheet" href="http://localhost:5000/style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Home Page</title>
 </head>
+
 <body>
-    <h1>Hello world</h1>
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div id="header">
+        <h1>LR_07 NODE.JS</h1>
+        <ul class="tabs">
+            <!-- <li><button href="#json" class="btn btn-primary btn-ghost">JSON</button></li>
+            <li><button href="#xml" class="btn btn-primary btn-ghost">XML</button></li>
+            <li><button href="#image" class="btn btn-primary btn-ghost">IMAGE</button></li>
+            <li><button href="#video" class="btn btn-primary btn-ghost">VIDEO</button></li>
+            <li><button href="#document" class="btn btn-primary btn-ghost">DOCUMENT</button></li> -->
+            <li><a href="#json"><button class="btn btn-primary btn-ghost">JSON</button></a></li>
+            <li><a href="#xml"><button class="btn btn-primary btn-ghost">XML</button></a></li>
+            <li><a href="#image"><button class="btn btn-primary btn-ghost">IMAGE</button></a></li>
+            <li><a href="#video"><button class="btn btn-primary btn-ghost">VIDEO</button></a></li>
+            <li><a href="#document"><button class="btn btn-primary btn-ghost">DOCUMENT</button></a></li>
+        </ul>
+    </div>
+    <div id="funcTabs">
+        <div class="tabs-content">
+            <ul>
+                <li id="json">
+                    <div>
+                        <h2>JSON</h2>
+                        <div id="json_demo" class="text"></div>
+                    </div>
+                </li>
+                <li id="xml">
+                    <div>
+                        <h2>XML</h2>
+                        <div id="xml_demo" class="text"></div>
+                    </div>
+                </li>
+                <li id="image">
+                    <div>
+                        <h2>Image</h2>
+                        <img src="http://localhost:5000/node.png" alt="Node.js">
+                    </div>
+                </li>
+                <li id="video">
+                    <div>
+                        <h2>Video</h2>
+                        <video src="http://localhost:5000/Hyperphantasia_NCS.mp4" controls="controls"></video>
+                    </div>
+                </li>
+                <li id="document">
+                    <div>
+                        <h2>Document</h2>
+                        <button class="btn btn-primary btn-ghost" onclick="window.location.href = 'http://localhost:5000/7.docx';">OPEN DOCUMENT</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script src="http://localhost:5000/7.js"></script>
 </body>
+
 </html>
