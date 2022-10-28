@@ -184,7 +184,7 @@ try {
                          });
                          response.end(fs.readFileSync("upload.html"));
                          break;
-                    }
+                    } 
                     case "/formparameter": {
                         fs.createReadStream('./static/formparameter.html').pipe(response);
                         break;
@@ -217,9 +217,9 @@ try {
                             break;
                         }
 
-                        console.log("GET: Default")
+                        console.log("GET: Not Found")
                         response.writeHead(404);
-                        response.end("GET: Default");
+                        response.end("404: Not Found");
                         break;
                     }
                 }

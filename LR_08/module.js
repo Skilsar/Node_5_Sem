@@ -18,7 +18,7 @@ function getHeader(mime) {
 exports.getHeader = getHeader;
 
 exports.res200 = (response, message, mime) => {
-    const statusCode = 200;
+    const statusCode = 200; 
     response.writeHead(statusCode, getHeader(mime));
     response.end(message);
 }

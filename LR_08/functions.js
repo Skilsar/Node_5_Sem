@@ -39,7 +39,7 @@ function generateResultXml(objRequestXml) {
     responseXml.element('sum', {
         element: 'x',
         result: sum
-    });
+    }); 
     responseXml.element('concat', {
         element: 'm',
         result: concat
