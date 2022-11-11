@@ -6,12 +6,12 @@ http.createServer((req, res) => {
     if (req.method == 'GET' && req.url == '/start') {
         res.end(fs.readFileSync('10-01.html'));
     } else {
-        res.statusCode = 404;
-        res.statusMess = 'Page not found';
+        res.statusCode = 400;
+        res.statusMess = 'Bad Request';
         res.writeHead(res.statusCode, {
             'Content-Type': 'text/html; charset=utf-8'
         });
-        res.end(fs.readFileSync('./404.html'));
+        res.end(fs.readFileSync('./400.html'));
     }
 }).listen(3000, () => {
     console.log('HTTP_Server running at http://localhost:3000/start')

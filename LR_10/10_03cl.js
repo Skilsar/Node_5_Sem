@@ -16,6 +16,4 @@ ws.on('open', () => {
     ws.on('message', message => {
         console.log(`Received message => ${message}`)
     })
-
-    //setTimeout(()=>{ws.close()}, 25000);
 });

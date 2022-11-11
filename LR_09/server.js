@@ -1,6 +1,10 @@
 const url = require("url");
-const {parse} = require("querystring");
-const {parseString} = require("xml2js");
+const {
+    parse
+} = require("querystring");
+const {
+    parseString
+} = require("xml2js");
 const xmlbuilder = require('xmlbuilder');
 const fs = require("fs");
 const http = require("http");
@@ -84,24 +88,24 @@ let Post_handler = (path, req, res) => {
             });
             break;
         case '/file':
-        const mform = new multiparty.Form({
-            uploadDir: "./static"
-        });
-        mform.on("file", (name, file) => {
-            res.writeHead(200, {
-                "Content-Type": "text/html"
+            const mform = new multiparty.Form({
+                uploadDir: "./static"
             });
-            res.end(`Файл = ${file.originalFilename} сохранен в ${file.path}`);
-        });
-        mform.on("error", (err) => {
-            console.log(err);
-            res.writeHead(200, {
-                "Content-Type": "text/html"
+            mform.on("file", (name, file) => {
+                res.writeHead(200, {
+                    "Content-Type": "text/html"
+                });
+                res.end(`Файл = ${file.originalFilename} сохранен в ${file.path}`);
             });
-            res.end("Error");
-        });
-        mform.parse(req);
-        break;
+            mform.on("error", (err) => {
+                console.log(err);
+                res.writeHead(200, {
+                    "Content-Type": "text/html"
+                });
+                res.end("Error");
+            });
+            mform.parse(req);
+            break;
     }
 }
 
