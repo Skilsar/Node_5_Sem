@@ -50,7 +50,7 @@
                 let result = document.getElementById("result");
                 result.innerHTML = '';
                 pdata.forEach(element => {
-                    result.innerHTML += '<p> SUBJECT:' + element.SUBJECT + ' SUBJECT NAME: ' + element.SUBJECT_NAME + ' PULPIT: ' + element.PULPIT + '</p>';
+                    result.innerHTML += '<p> <b>SUBJECT:</b> ' + element.SUBJECT + ' <b>SUBJECT NAME</b>: ' + element.SUBJECT_NAME + ' <b>PULPIT:</b> ' + element.PULPIT + '</p>';
                 });
             });
     }
@@ -108,9 +108,9 @@
             },
             body: JSON.stringify(
                 {
-                    subject: SUBJECT.value,
-                    subject_name: SUBJECT_NAME.value,
-                    pulpit: PULPIT.value
+                    "SUBJECT": `${SUBJECT.value}`,
+                    "SUBJECT_NAME": `${SUBJECT_NAME.value}`,
+                    "PULPIT": `${PULPIT.value}`
                 }
             )
         })

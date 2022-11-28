@@ -47,6 +47,15 @@ module.exports = (req, res) => {
                 data_json = JSON.parse(data_json);
                 console.log(`POST SUBJECT DATA: ${JSON.stringify(data_json)}`)
                 res.writeHead(200, {'Content-Type': 'application/json'});
+                if (data_json.subject != undefined){
+                    data_json.SUBJECT = data_json.subject;
+                }
+                if (data_json.subject_name != undefined) {
+                    data_json.SUBJECT_NAME = data_json.subject_name;
+                }
+                if (data_json.pulpit != undefined) {
+                    data_json.PULPIT = data_json.pulpit;
+                }
                 console.log(`POST SUBJECT: ${data_json.SUBJECT}, ${data_json.SUBJECT_NAME}, ${data_json.PULPIT}\n`);
 
                 DB.postSubjects(data_json.SUBJECT, data_json.SUBJECT_NAME, data_json.PULPIT).then(records => {

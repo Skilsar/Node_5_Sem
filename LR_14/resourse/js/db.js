@@ -108,29 +108,21 @@ class DB {
         .input('AUDITORIUM_CAPACITY', sql.Int(), auditorium_capacity)
         .input('AUDITORIUM_TYPE', sql.Char(10), auditorium_type)
         .query('INSERT INTO AUDITORIUM (AUDITORIUM, AUDITORIUM_NAME, AUDITORIUM_CAPACITY, AUDITORIUM_TYPE) VALUES(@auditorium, @auditorium_name, @auditorium_capacity, @auditorium_type);'));
-
-        // return this.connectionPool.then(pool => {
-        //     return pool.request()
-        //         .input('auditorium', sql.NVarChar, auditorium)
-        //         .input('auditorium_name', sql.NVarChar, auditorium_name)
-        //         .input('auditorium_capacity', sql.Int, auditorium_capacity)
-        //         .input('auditorium_type', sql.NVarChar, auditorium_type)
-        //         .query('INSERT AUDITORIUM(AUDITORIUM, AUDITORIUM_NAME, AUDITORIUM_CAPACITY, AUDITORIUM_TYPE)' +
-        //             ' values(@auditorium, @auditorium_name, @auditorium_capacity, @auditorium_type)');
-        // });
     }
 
     putFaculties(faculty, faculty_name) {
+        console.log(`PUT FACULTY PRE-QUERY: ${faculty}, ${faculty_name}`);
         return this.connectionPool.then(pool => {
             return pool.request()
-                .input('faculty', sql.NVarChar, faculty)
-                .input('faculty_name', sql.NVarChar, faculty_name)
-                .query('UPDATE FACULTY SET FACULTY_NAME = @faculty_name WHERE FACULTY = @faculty');
+                .input('FACULTY', sql.Char(10), faculty)
+                .input('FACULTY_NAME', sql.VarChar(50), faculty_name)
+                .query('UPDATE FACULTY SET FACULTY_NAME = @FACULTY_NAME WHERE FACULTY = @FACULTY');
         });
     }
     getFaculty(faculty) {
+        console.log(`GetFaculty: ${faculty}`);
         return this.connectionPool.then(pool => {
-            return pool.request().input('fac', sql.NVarChar, faculty).query('Select * from FACULTY where faculty = @fac')
+            return pool.request().input('faculty', sql.Char(10), faculty).query('Select * from FACULTY where faculty = @faculty')
         });
     }
 
@@ -167,28 +159,29 @@ class DB {
     }
 
     putAuditoriums_Types(auditorium_type, auditorium_typename) {
+        console.log(`PUT AUDITORIUM_TYPE PRE-QUERY: ${auditorium_type}, ${auditorium_typename}`);
         return this.connectionPool.then(pool => {
             return pool.request()
-                .input('auditorium_type', sql.NVarChar, auditorium_type)
-                .input('auditorium_typename', sql.NVarChar, auditorium_typename)
-                .query('UPDATE AUDITORIUM_TYPE SET AUDITORIUM_TYPENAME = @auditorium_typename WHERE AUDITORIUM_TYPE = @auditorium_type');
+                .input('AUDITORIUM_TYPE', sql.Char(10), auditorium_type)
+                .input('AUDITORIUM_TYPENAME', sql.VarChar(30), auditorium_typename)
+                .query('UPDATE AUDITORIUM_TYPE SET AUDITORIUM_TYPENAME = @AUDITORIUM_TYPENAME WHERE AUDITORIUM_TYPE = @AUDITORIUM_TYPE');
         });
     }
 
     putAuditoriums(auditorium, auditorium_name, auditorium_capacity, auditorium_type) {
         return this.connectionPool.then(pool => {
             return pool.request()
-                .input('auditorium', sql.NVarChar, auditorium)
-                .input('auditorium_name', sql.NVarChar, auditorium_name)
+                .input('auditorium', sql.Char(10), auditorium)
+                .input('auditorium_name', sql.VarChar(200), auditorium_name)
                 .input('auditorium_capacity', sql.Int, auditorium_capacity)
-                .input('auditorium_type', sql.NVarChar, auditorium_type)
+                .input('auditorium_type', sql.Char(10), auditorium_type)
                 .query('UPDATE AUDITORIUM SET AUDITORIUM_NAME = @auditorium_name, AUDITORIUM_CAPACITY = @auditorium_capacity, AUDITORIUM_TYPE =  @auditorium_type' +
                     ' WHERE AUDITORIUM = @auditorium');
         });
     }
     getAuditorim(audit) {
         return this.connectionPool.then(pool => {
-            return pool.request().input('audit', sql.NVarChar, audit).query('Select * from AUDITORIUM where AUDITORIUM = @audit')
+            return pool.request().input('audit', sql.Char(10), audit).query('Select * from AUDITORIUM where AUDITORIUM = @audit')
         });
     }
     deleteFaculties(faculty) {
