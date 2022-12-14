@@ -1,0 +1,7 @@
+Username:
+Skilsar
+Password:
+0lOT1VNjUFR9qGFD
+
+connect string
+mongodb+srv://skilsar:<password>@node.agl6pbv.mongodb.net/?retryWrites=true&w=majority
