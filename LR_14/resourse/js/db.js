@@ -1,10 +1,5 @@
 const sql = require('mssql/msnodesqlv8');
 
-// const config = {
-//     "driver":"msnodesqlv8",
-//     "connectionString": "Driver={SQL Server Native Client 11.0};Server={DESKTOP-23I014S};Database={Node_13};Trusted_Connection={yes};"
-// }
-
 const config = {
     user: 'user',
     password: 'qwer1234',

@@ -2,7 +2,7 @@ let serverPort = 5005;
 let serverHost = '127.0.0.1';
 
 let dgram = require('dgram');
-let message = 'ClientUDP';
+let message = 'ClientUDP\0';
 
 let client = dgram.createSocket('udp4');
 let intervalRef = null;

@@ -472,3 +472,5 @@ LR_13/UDP/ServerU/ServerU.vcxproj
 LR_13/UDP/ServerU/ServerU.vcxproj.filters
 
 LR_13/UDP/ServerU/ServerU.vcxproj.user
+
+*.zip

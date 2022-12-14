@@ -1,7 +1,7 @@
 const net = require('net');
 
-let server_host = '127.0.0.1';
-let server_port = 5000;
+let server_host = '0.0.0.0';
+let server_port = 5005;
 
 let client = new net.Socket();
 let intervalRef = null;
