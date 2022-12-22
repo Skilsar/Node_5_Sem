@@ -1,0 +1,105 @@
+query {
+    getFaculties {
+         FACULTY, FACULTY_NAME
+    }
+}
+
+query {
+    getFaculties(FACULTY: "FOF") {
+         FACULTY, FACULTY_NAME
+    }
+}
+
+mutation {
+    setFaculty(FACULTY: "FOF", FACULTY_NAME:"HGG TEST") {
+         FACULTY, FACULTY_NAME
+    }
+}
+
+mutation {
+    delFaculty(FACULTY: "FOF")
+}
+
+---------------------------------------------
+query {
+    getTeachers{
+         TEACHER, TEACHER_NAME, PULPIT
+    }
+}
+
+query {
+    getTeachers(TEACHER: "ASI"){
+         TEACHER, TEACHER_NAME, PULPIT
+    }
+}
+
+mutation {
+    setTeacher(TEACHER: "ASI", TEACHER_NAME:"HGG TEST") {
+         FACULTY, FACULTY_NAME
+    }
+}
+
+mutation {
+    delTeacher(TEACHER: "ASI")
+}
+
+---------------------------------------------
+
+query {
+    getPulpits {
+         PULPIT, PULPIT_NAME, FACULTY
+    }
+}
+
+query {
+    getPulpits(PULPIT: "ХТЭПиМЭЕ") {
+         PULPIT, PULPIT_NAME, FACULTY
+    }
+}
+
+mutation {
+    setPulpit(PULPIT: "my", PULPIT_NAME: "djh", FACULTY: "ХТиТ") {
+         PULPIT, PULPIT_NAME, FACULTY
+    }
+}
+
+mutation {
+    delPulpit(PULPIT: "my")
+}
+
+--------------------------------
+query {
+    getSubjects {
+         SUBJECT, SUBJECT_NAME, PULPIT
+    }
+}
+
+query {
+    getSubjects(SUBJECT: "CMS") {
+         SUBJECT, SUBJECT_NAME, PULPIT
+    }
+}
+
+mutation {
+    setSubject(SUBJECT: "CMS", SUBJECT_NAME: "Computer multimedia systems", PULPIT: "ISIT") {
+         SUBJECT, SUBJECT_NAME, PULPIT
+    }
+}
+
+mutation {
+    delSubject(SUBJECT: "CMS")
+}
+
+-------------------------------
+
+query {
+    getTeachersByFaculty(FACULTY: "ИДиП") {
+         FACULTY, TEACHERS{TEACHER, TEACHER_NAME, PULPIT}
+    }
+}
+
+query {
+    getSubjectsByFaculties(FACULTY: "ИДиП") {
+         PULPIT,PULPIT_NAME, FACULTY, SUBJECTS{SUBJECT, SUBJECT_NAME, PULPIT}
+    }
+}
