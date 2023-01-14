@@ -4,7 +4,7 @@ const ObjectId = require('mongodb').ObjectID;
 class DB{
     constructor()
     {
-        this.url = 'mongodb+srv://skilsar:0lOT1VNjUFR9qGFD@node.agl6pbv.mongodb.net/BSTU?retryWrites=true&w=majority';
+        this.url = 'mongodb+srv://****************.mongodb.net/BSTU?retryWrites=true&w=majority';
         this.client = new MongoClient(this.url, {useNewUrlParser: true, useUnifiedTopology: true});
         this.client = this.client.connect().then(connection => {
             return connection.db("BSTU")
